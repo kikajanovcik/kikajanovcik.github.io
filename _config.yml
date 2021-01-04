@@ -1,3 +1,13 @@
 title: kristina janovcikova
+author: kristina janovcikova
 show_downloads: false
 theme: jekyll-theme-cayman
+
+# --- List of links in the navigation bar --- #
+
+About Me: "aboutme"
+
+# Exclude these files from production site
+exclude:
+  - LICENSE
+  - README.md
