@@ -4,14 +4,8 @@ title: Algorithms
 permalink: /algorithms
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+## Graph Data Structure & Algorithms
 
-[Link to another page](./another-page.html).
+<img style="float: left; margin-right: 20px;" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Small_Network.png">
 
-There should be whitespace between paragraphs.
-
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
-
-## Header 1
-
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+A Graph is a non-linear data structure consisting of nodes and edges. The nodes are sometimes also referred to as vertices and the edges are lines or arcs that connect any two nodes in the graph. More formally a Graph can be defined as: _a graph consists of a finite set of vertices (or nodes) and set of Edges which connect a pair of nodes._

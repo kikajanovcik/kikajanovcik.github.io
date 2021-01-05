@@ -4,14 +4,23 @@ title: System design
 permalink: /system-design
 ---
 
-Text can be **bold**, _italic_, or ~~strikethrough~~.
+## Scalability
 
-[Link to another page](./another-page.html).
+**Vertical scaling**
 
-There should be whitespace between paragraphs.
+- Adding more power to the existing machine. In practice this would mean adding better processors, increasing RAM, or other power - increasing adjustments.
+- Load balancing unnecessary
+- Single point of failure
+- Inter process communication
+- Data consistent
+- Hardware limit
 
-There should be whitespace between paragraphs. We recommend including a README, or a file with information about your project.
+**Horizontal scaling**
 
-## Header 1
+**Caching**
 
-This is a normal paragraph following a header. GitHub is a code hosting platform for version control and collaboration. It lets you and others work together on projects from anywhere.
+**Load balancing**
+
+**Database replication**
+
+**Database partitioning**

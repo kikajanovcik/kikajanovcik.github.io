@@ -146,6 +146,7 @@ a {
 
 .main-content {
   word-wrap: break-word;
+  font-size: 0.9rem;
 
   :first-child {
     margin-top: 0;
@@ -155,17 +156,14 @@ a {
     max-width: 64rem;
     padding: 2rem 6rem;
     margin: 0 auto;
-    font-size: 1.1rem;
   }
 
   @include medium {
     padding: 2rem 4rem;
-    font-size: 1.1rem;
   }
 
   @include small {
     padding: 2rem 1rem;
-    font-size: 1rem;
   }
 
   kbd {
@@ -192,10 +190,21 @@ a {
   h4,
   h5,
   h6 {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0.4rem;
     font-weight: normal;
     color: $section-headings-color;
+  }
+
+  .post-title {
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .post-content {
+    h2 {
+      color: $post-headings-color;
+    }
   }
 
   p {
