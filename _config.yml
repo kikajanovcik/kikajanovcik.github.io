@@ -1,11 +1,6 @@
 title: kristina janovcikova
 author: kristina janovcikova
-show_downloads: false
 theme: jekyll-theme-cayman
-
-# --- List of links in the navigation bar --- #
-
-About Me: "aboutme"
 
 plugins:
   - jekyll-paginate
@@ -15,3 +10,5 @@ plugins:
 exclude:
   - LICENSE
   - README.md
+  - Gemfile
+  - Gemfile.lock
