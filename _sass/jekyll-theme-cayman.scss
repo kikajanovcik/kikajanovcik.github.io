@@ -1,6 +1,7 @@
 @import "normalize";
 @import "rouge-github";
 @import "variables";
+@import "nav";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
 
 @mixin large {
@@ -154,12 +155,12 @@ a {
 
   @include large {
     max-width: 64rem;
-    padding: 2rem 6rem;
+    padding: 2rem 3rem;
     margin: 0 auto;
   }
 
   @include medium {
-    padding: 2rem 4rem;
+    padding: 2rem 2rem;
   }
 
   @include small {
@@ -344,7 +345,8 @@ a {
   }
 }
 
-.site-footer {
+.site-footer,
+.separator {
   padding-top: 2rem;
   margin-top: 2rem;
   border-top: solid 1px $hr-border-color;

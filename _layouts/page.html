@@ -9,10 +9,20 @@ layout: default
   </header>
 
   <div class="post-content">
-    {{ content }}
+    <div class="main">
+      <div class="content">
+        {{ content }}
+      </div>
+      <nav class="section-nav">    
+        {% if page.permalink == "/system-design" %}
+          {% include nav.html %}
+        {% endif %}
+      </nav>
+    </div>
   </div>
 
 </article>
+
 <footer class="site-footer">
 
 </footer>
