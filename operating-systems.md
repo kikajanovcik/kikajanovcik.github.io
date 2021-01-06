@@ -4,7 +4,7 @@ title: Operating Systems
 permalink: /operating-systems
 ---
 
-## Bit Manipulation
+## Bit Manipulation<a name="bit-manipulation"></a>
 
 Operations with bits are used in Data compression (data is compressed by converting it from one representation to another, to reduce the space), Exclusive-Or Encryption (an algorithm to encrypt the data for safety issues). In order to encode, decode or compress files we have to extract the data at bit level. Bitwise Operations are faster and closer to the system and sometimes optimize the program to a good level.
 

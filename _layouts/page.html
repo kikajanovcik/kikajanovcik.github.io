@@ -14,8 +14,16 @@ layout: default
         {{ content }}
       </div>
       <nav class="section-nav">    
+        {% if page.permalink == "/algortithms" %}
+          {% include algorithms-nav.html %}
+        {% endif %}
+
+        {% if page.permalink == "/operating-systems" %}
+          {% include operating-systems-nav.html %}
+        {% endif %}
+
         {% if page.permalink == "/system-design" %}
-          {% include nav.html %}
+          {% include system-design-nav.html %}
         {% endif %}
       </nav>
     </div>
