@@ -61,7 +61,7 @@ More about load balancer can be found [here](#load-balancer).
 
 #### Database replication
 
-A process of copying data from a central database to one or more databases
+A process of copying data from a central database to one or more databases.
 
 #### Database partitioning
 
@@ -71,10 +71,95 @@ Partitioning is dividing of stored database objects (tables, indexes, views) to 
 
 ## Load Balancer<a name="load-balancer"></a>
 
-- DNS load balancing is achieved with a single name that resolves to multiple names or IP addresses.
-- Bridged load balancing uses a virtual IP address created in the same IP network as the real server. Packets designated for the virtual IP addresses are redirected to the real servers.
-- Routed load balancing is load balancing at layer three, in which the virtual IP address exists on one network with the real servers existing on one or more other networks.
-- Network load balancing allows you to create a cluster of between 2 and 32 web servers, with each having its own computer name and static IP address.
+Load Balancer helps to spread the traffic across a cluster of servers and also keeps track of the status of all the resources while distributing requests. Typically a load balancer sits between the client and the server accepting incoming network and application traffic and distributing the traffic across multiple backend servers using various algorithms.
+<br/><br/>
+The load balancer can be a single point of failure; to overcome this, a second load balancer can be connected to the first to form a cluster. Each LB monitors the health of the other and, since both of them are equally capable of serving traffic and failure detection, in the event the main load balancer fails, the second load balancer takes over.
+
+![Load Balancer](/assets/img/loadbalancer.png)
+
+**Health Checks:** Load balancers should only forward traffic to “healthy” backend servers. To monitor the health of a backend server, “health checks” regularly attempt to connect to backend servers to ensure that servers are listening. If a server fails a health check, it is automatically removed from the pool, and traffic will not be forwarded to it until it responds to the health checks again.
+<br/><br/>
+Load balancing assigninment methods:
+
+- **Least Connection Method:** directs traffic to the server with the fewest active connections. This approach is quite useful when there are a large number of persistent client connections which are unevenly distributed between the servers.
+- **Least Response Time Method:** directs traffic to the server with the fewest active connections and the lowest average response time.
+- **Least Bandwidth Method:** selects the server that is currently serving the least amount of traffic measured in megabits per second (Mbps).
+- **Round Robin Method:** cycles through a list of servers and sends each new request to the next server. It is most useful when the servers are of equal specification and there are not many persistent connections.
+- **Weighted Round Robin Method:** designed to better handle servers with different processing capacities. Each server is assigned a weight (an integer value that indicates the processing capacity). Servers with higher weights receive new connections before those with less weights and servers with higher weights get more connections than those with less weights.
+- **IP Hash:** a hash of the IP address of the client is calculated to redirect the request to a server.
+
+Load balancing techniques:
+
+#### DNS load balancing
+
+DNS load balancing is achieved with a single name that resolves to multiple names or IP addresses.
+<br/><br/>
+**Pros:**
+
+- Easy to configure and understand.
+- DNS based cluster nodes don’t require multiple network interface cards (NICs). Each machine can have a single NIC with a unique IP address.
+- Multiple IP addresses can be assigned to the host record. The DNS server can rotate these addresses in a round-robin manner and workload gets divided equally among the members of the Exchange Server cluster.
+- Load balancing pools for various geographic regions are established. The administrator can take advantage of infrastructure dispersed geographically and improve performance by reducing the distance between the receivers and data centers.
+
+**Cons:**
+
+- No native failure detection or fault tolerance and no dynamic load re-balancing.
+- No capability other than round-robin.
+- No way to ensure connection to the same server twice, if required.
+- DNS cannot tell if a server has become unavailable.
+- Cannot take into account the unknown percentage of users who have DNS data cached, with varying amounts of Time to Live (TTL) left. So, when TTL times out, visitors may still be directed to the ‘wrong’ server.
+- Load may not be evenly shared as DNS cannot tell how much load is present on the servers.
+- Each server requires a public IP address.
+
+#### Bridged load balancing
+
+Bridged load balancing uses a virtual IP address created in the same IP network as the real server. Packets designated for the virtual IP addresses are redirected to the real servers.
+<br/><br/>
+**Pros:**
+
+- Can be embedded into an existing network with no additional IP networks required.
+- Could be easier to understand for simple networks.
+- Usually cheaper than a routed model.
+
+**Cons:**
+
+- Usually limited to a single local network.
+- Layer-2 issues including loops and spanning-tree problems can appear if balancing solution is not designed carefully.
+- Can be more difficult to understand for people used to layer-3 environments.
+  <br/><br/>
+
+#### Routed load balancing
+
+Routed load balancing is load balancing at layer three, in which the virtual IP address exists on one network with the real servers existing on one or more other networks.
+<br/><br/>
+**Pros:**
+
+- Allows real servers to be geographically diverse providing expandability.
+- Easier to comprehend for people used to layer-3 environments.
+- No spanning-tree issues.
+
+**Cons:**
+
+- Layer-3 load balancing can be costly.
+- Requires additional IP address and network design to implement.
+
+#### Network load balancing
+
+Network load balancing allows you to create a cluster of between 2 and 32 web servers, with each having its own computer name and static IP address.
+<br/><br/>
+**Pros:**
+
+- NLB provides fault tolerance at the network layer ensuring that connections are not directed to a server that is down.
+- Good for scalability as it supports up to 32 servers per segment.
+- NLB is easily configurable.
+- No special hardware is required. Two network adapters can be used to mitigate a point of failure.
+
+**Cons:**
+
+- Unable to detect if a server is unavailable and can direct a user to a system that can’t provide the requested service.
+- There is no shared data.
+- NLB does not work with Layer three switches or Token Ring adapters.
+- All servers in a cluster must be in the same subnet.
 
 <div class="separator"></div>
 
