@@ -75,7 +75,8 @@ Left shift operator is a binary operator which shift the some number of bits, in
 
 ```
 1 << 1 = 2  = 2^1
-1 << 2 = 4  = 2^2 1 << 3 = 8 = 2^3
+1 << 2 = 4  = 2^2
+1 << 3 = 8  = 2^3
 1 << 4 = 16 = 2^4
 …
 1 << n = 2n
