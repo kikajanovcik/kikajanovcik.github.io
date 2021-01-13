@@ -9,12 +9,15 @@ layout: default
   </header>
 
   <div class="post-content">
+    {% if page.simple %}
+      {{ content }} 
+    {% else %}
     <div class="main">
       <div class="content">
         {{ content }}
       </div>
       <nav class="section-nav">    
-        {% if page.permalink == "/algortithms" %}
+        {% if page.permalink == "/algorithms" %}
           {% include algorithms-nav.html %}
         {% endif %}
 
@@ -27,6 +30,7 @@ layout: default
         {% endif %}
       </nav>
     </div>
+    {% endif %}
   </div>
 
 </article>
