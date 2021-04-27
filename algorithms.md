@@ -20,7 +20,7 @@ The **time complexity** of an algorithm quantifies the amount of time taken by a
 
 O(1) means that the algorithm takes the same number of steps to execute regardless of how much data is passed in.
 
-#### O(logN) — Logarithmic
+#### O(log N) — Logarithmic
 
 Simply put, O(logN) describes an algorithm that its number of operations increases by one each time the data is doubled.
 
@@ -28,7 +28,7 @@ Simply put, O(logN) describes an algorithm that its number of operations increas
 
 An algorithm that is O(N) will take as many steps as there are elements of data. So when an array increases in size by one element, an O(N) algorithm will increase by one step.
 
-#### O(N logN) — Log-linear
+#### O(N log N) — Log-linear
 
 An algorithm of this complexity class is doing log(N) work N times and therefore its performance is slightly worse than O(N). Many practical algorithms belong in this category (from sorting, to pathfinding, to compression), so we are mentioning it for completeness.
 
