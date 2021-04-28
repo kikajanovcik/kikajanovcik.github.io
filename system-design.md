@@ -197,3 +197,29 @@ can grow & scale horizontally
 
 NoSQL document store
 offers persistence
+
+<div class="separator"></div>
+
+## Databases<a name="databases"></a>
+
+### Relational Database Management System (RDBMS)
+
+A relational database like SQL is a collection of data items organized in tables.
+<br/><br/>
+**ACID** is a set of properties of relational database transactions.
+
+ - **Atomicity:** the execution of each transaction can be modeled as a single operation although it can also contain multiple queries. If one of the queries in a transaction fails, the whole transaction is aborted leaving the database status unchanged.
+- **Consistency:** the status of the database after each transaction should remain consistent.
+- **Isolation:** if multiple transactions are accessing the same data at the same time (concurrently), the resulting database status should be the same as if the transactions were executed serially.
+- **Durability:** after successful commit, the status should be persistent even in case of failure.
+<br/><br/>
+There are many techniques to scale a relational database: master-slave replication, master-master replication, federation, sharding, denormalization, and SQL tuning.
+
+#### Master-slave replication
+
+The master serves reads and writes, replicating writes to one or more slaves, which serve only reads. Slaves can also replicate to additional slaves in a tree-like fashion. If the master goes offline, the system can continue to operate in read-only mode until a slave is promoted to a master or a new master is provisioned.
+<br/><br/>
+**Cons:**
+
+- Additional logic is needed to promote a slave to a master.
+
