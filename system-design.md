@@ -165,7 +165,13 @@ Network load balancing allows you to create a cluster of between 2 and 32 web se
 
 ## Reverse Proxy<a name="reverse-proxy"></a>
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+A reverse proxy is a server that sits in front of web servers and forwards client (e.g. web browser) requests to those web servers. Requests from clients are forwarded to a server that can fulfill it before the reverse proxy returns a server's response to the client. Reverse proxies are typically implemented to help increase security, performance, and reliability. 
+<br/><br/>
+The difference between a _forward_ and _reverse proxy_ is subtle, but important. A simplified way to sum it up would be to say that a forward proxy sits in front of a client and ensures that no origin server ever communicates directly with that specific client. On the other hand, a reverse proxy sits in front of an origin server and ensures that no client ever communicates directly with that origin server.
+<br/><br/>
+One of the easiest and most cost-effective ways to reap all the benefits of a reverse proxy is by signing up for a CDN service, for example, the Cloudflare CDN.
+
+![Reverse Proxy](/assets/img/reverseproxy.png)
 
 <div class="separator"></div>
 
@@ -174,8 +180,8 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 **Memcached:**
 
 Store simple string key / value pairs. Store database resultset object, HTTP api response, or serializable in-memory objects, JSON / XML document as value with a string key, results of page rendering etc.
-
-Cons:
+<br/><br/>
+**Cons:**
 
 - no persistence
 - limits size of data upto 1 MB per key
