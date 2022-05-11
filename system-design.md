@@ -218,16 +218,42 @@ A relational database like SQL is a collection of data items organized in tables
 - **Consistency:** the status of the database after each transaction should remain consistent.
 - **Isolation:** if multiple transactions are accessing the same data at the same time (concurrently), the resulting database status should be the same as if the transactions were executed serially.
 - **Durability:** after successful commit, the status should be persistent even in case of failure.
+
 <br/><br/>
 There are many techniques to scale a relational database: master-slave replication, master-master replication, federation, sharding, denormalization, and SQL tuning.
 
 #### Master-slave replication
 
 The master serves reads and writes, replicating writes to one or more slaves, which serve only reads. Slaves can also replicate to additional slaves in a tree-like fashion. If the master goes offline, the system can continue to operate in read-only mode until a slave is promoted to a master or a new master is provisioned.
+
+![Master-slave replication](/assets/img/master-slave-replication.png)
+
 <br/><br/>
 **Cons:**
 
 - Additional logic is needed to promote a slave to a master.
+
+#### Master-master replication
+
+Both masters serve reads and writes and coordinate with each other on writes. If either master goes down, the system can continue to operate with both reads and writes.
+
+![Master-master replication](/assets/img/master-master-replication.png)
+
+<br/><br/>
+**Cons:**
+
+- Requires a load balancer and new logic to determine where to write.
+- Most master-master systems are either loosely consistent (violating ACID) or have increased write latency due to synchronization.
+- Conflict resolution necessary as more write nodes are added and as latency increases.
+
+#### Master-slave & master-master replication
+
+**Cons:**
+
+- Potential loss of data if the master fails before any newly written data can be replicated to other nodes.
+- Writes are replayed to the read replicas. If there are a lot of writes, the read replicas can get clogged and can't do as many reads.
+- Similarly, the more read slaves, the more you have to replicate, which leads to greater replication lag.
+- Replication adds more hardware and additional complexity.
 
 ### NoSQL<a name="databases-nosql"></a>
 
