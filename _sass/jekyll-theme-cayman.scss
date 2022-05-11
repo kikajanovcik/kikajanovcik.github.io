@@ -130,6 +130,7 @@ a {
   -moz-transition: all .5s linear;
   -o-transition: all .5s linear;
   transition: all .5s linear;
+  -webkit-backface-visibility: hidden !important;
 }
 
 .page-header-index {
