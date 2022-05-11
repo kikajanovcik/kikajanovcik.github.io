@@ -136,9 +136,20 @@ a {
 .page-header-index {
   background-size: cover;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+
+.banner-index {
+  position: relative;
+  top: 33%;
+}
+
+.banner {
+  position: relative;
+  top: 0%;
+  -webkit-transition: all .5s linear;
+  -moz-transition: all .5s linear;
+  -o-transition: all .5s linear;
+  transition: all .5s linear;
 }
 
 .project-name {
