@@ -3,6 +3,7 @@ author: kristina janovcikova
 theme: jekyll-theme-cayman
 
 plugins:
+  - jekyll
   - jekyll-paginate
   - jekyll-sitemap
 
@@ -10,5 +11,6 @@ plugins:
 exclude:
   - LICENSE
   - README.md
+  - TODO.md
   - Gemfile
   - Gemfile.lock

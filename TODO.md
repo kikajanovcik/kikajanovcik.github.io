@@ -14,3 +14,7 @@
 ### Algortims
 
 ### System Design
+
+### Rum Project
+
+bundle exec jekyll serve

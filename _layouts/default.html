@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: " en-US" }}">
+<html lang="{{ site.lang | default: 'en-US' }}">
 
 {% include head.html %}
 
 <body>
-
-  <header class="page-header" role="banner">
+  <header class="page-header-default page-header-index" role="banner">
     {% include header.html %}
   </header>
 
@@ -14,4 +13,5 @@
   </main>
 </body>
 <script src="{{ base.url | prepend: site.url }}/assets/js/nav.js"></script>
+<script src="{{ base.url | prepend: site.url }}/assets/js/load.js"></script>
 </html>

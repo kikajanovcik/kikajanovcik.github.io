@@ -108,7 +108,7 @@ a {
   }
 }
 
-.page-header {
+.page-header-default {
   color: $header-heading-color;
   text-align: center;
   background-color: $header-bg-color;
@@ -120,16 +120,19 @@ a {
   padding: 2rem 1rem 0.5rem 1rem;
 }
 
+.page-header {
+  height: 250px;
+}
+
+.page-header-transitioning {
+  height: 250px;
+  -webkit-transition: all .5s linear;
+  -moz-transition: all .5s linear;
+  -o-transition: all .5s linear;
+  transition: all .5s linear;
+}
+
 .page-header-index {
-  color: $header-heading-color;
-  text-align: center;
-  background-color: $header-bg-color;
-  background-image: linear-gradient(
-    120deg,
-    $header-bg-color-secondary,
-    $header-bg-color
-  );
-  padding: 2rem 1rem 0.5rem 1rem;
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -226,7 +229,7 @@ a {
   .post-content {
     h2 {
       color: $post-headings-color;
-      font-family: "American Typewriter", serif;
+      font-family: "Cutive", serif;
       font-size: 1.6rem;
     }
   }
