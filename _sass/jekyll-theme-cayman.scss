@@ -221,7 +221,6 @@ a {
   h4,
   h5,
   h6 {
-    text-transform: uppercase;
     color: $headings-color;
     text-transform: uppercase;
   }
@@ -229,8 +228,8 @@ a {
   h2 {
     margin-top: 0rem;
     margin-bottom: 0.4rem;
-    font-weight: normal;
     color: $section-headings-color;
+    font-weight: bold;
   }
 
   .post-title {
@@ -241,8 +240,9 @@ a {
   .post-content {
     h2 {
       color: $post-headings-color;
-      font-family: "Cutive", serif;
-      font-size: 1.6rem;
+      font-family: Monospace;
+      font-weight: normal;
+      font-size: 1.2rem;
     }
   }
 
