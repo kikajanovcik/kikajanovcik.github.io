@@ -77,7 +77,7 @@ The load balancer can be a single point of failure; to overcome this, a second l
 
 ![Load Balancer](/assets/img/loadbalancer.png)
 
-**Health Checks:** Load balancers should only forward traffic to “healthy” backend servers. To monitor the health of a backend server, “health checks” regularly attempt to connect to backend servers to ensure that servers are listening. If a server fails a health check, it is automatically removed from the pool, and traffic will not be forwarded to it until it responds to the health checks again.
+**Health Checks:** Load balancers should only forward traffic to "healthy" backend servers. To monitor the health of a backend server, "health checks" regularly attempt to connect to backend servers to ensure that servers are listening. If a server fails a health check, it is automatically removed from the pool, and traffic will not be forwarded to it until it responds to the health checks again.
 <br/><br/>
 Load balancing assigninment methods:
 
@@ -97,7 +97,7 @@ DNS load balancing is achieved with a single name that resolves to multiple name
 **Pros:**
 
 - Easy to configure and understand.
-- DNS based cluster nodes don’t require multiple network interface cards (NICs). Each machine can have a single NIC with a unique IP address.
+- DNS based cluster nodes don't require multiple network interface cards (NICs). Each machine can have a single NIC with a unique IP address.
 - Multiple IP addresses can be assigned to the host record. The DNS server can rotate these addresses in a round-robin manner and workload gets divided equally among the members of the Exchange Server cluster.
 - Load balancing pools for various geographic regions are established. The administrator can take advantage of infrastructure dispersed geographically and improve performance by reducing the distance between the receivers and data centers.
 
@@ -107,7 +107,7 @@ DNS load balancing is achieved with a single name that resolves to multiple name
 - No capability other than round-robin.
 - No way to ensure connection to the same server twice, if required.
 - DNS cannot tell if a server has become unavailable.
-- Cannot take into account the unknown percentage of users who have DNS data cached, with varying amounts of Time to Live (TTL) left. So, when TTL times out, visitors may still be directed to the ‘wrong’ server.
+- Cannot take into account the unknown percentage of users who have DNS data cached, with varying amounts of Time to Live (TTL) left. So, when TTL times out, visitors may still be directed to the 'wrong' server.
 - Load may not be evenly shared as DNS cannot tell how much load is present on the servers.
 - Each server requires a public IP address.
 
@@ -156,7 +156,7 @@ Network load balancing allows you to create a cluster of between 2 and 32 web se
 
 **Cons:**
 
-- Unable to detect if a server is unavailable and can direct a user to a system that can’t provide the requested service.
+- Unable to detect if a server is unavailable and can direct a user to a system that can't provide the requested service.
 - There is no shared data.
 - NLB does not work with Layer three switches or Token Ring adapters.
 - All servers in a cluster must be in the same subnet.
@@ -177,7 +177,7 @@ One of the easiest and most cost-effective ways to reap all the benefits of a re
 
 ## Cache<a name="cache"></a>
 
-**Memcached:**
+**Memcached**
 
 Store simple string key / value pairs. Store database resultset object, HTTP api response, or serializable in-memory objects, JSON / XML document as value with a string key, results of page rendering etc.
 <br/><br/>
@@ -187,7 +187,7 @@ Store simple string key / value pairs. Store database resultset object, HTTP api
 - limits size of data upto 1 MB per key
 - Memcached is not good for enterprise use cases. It does not offer many features like automatic elastic cluster management, sophisticated high availability, auto failover, load re-balancing, cross data centre replication etc
 
-**Redis:**
+**Redis**
 
 stores all data in memory, essentially redis is a big in-memory dictionary
 Support for size of value upto 512 MB per key
@@ -343,3 +343,116 @@ NoSQL is a collection of data items represented in a key-value store, document s
 - **Basically available**: the system guarantees availability.
 - **Soft state**: the state of the system may change over time, even without input.
 - **Eventual consistency**: the system will become consistent over a period of time, given that the system doesn't receive input during that period.
+
+#### Types of NoSQL Databases
+
+##### Key-Value Store
+
+A key-value store is a simple but powerful database model that functions like a hash table, where each key is unique and maps to a specific value.
+<br/><br/>
+**Core Characteristics:**
+- O(1) time complexity for reads and writes
+- Typically backed by memory or SSD for fast access
+- Can store keys in lexicographic order for efficient range queries
+- Supports metadata storage alongside values
+
+**Common Implementations:**
+
+*Redis Architecture:*
+- Supports two persistence mechanisms:
+  - AOF (Append Only File): Change-log style persistence
+  - RDB (Redis Database File): Snapshot style persistence
+- In-memory data structure store
+- Supports complex data structures
+
+*Memcached Architecture:*
+- Pure in-memory caching system
+- Simpler architecture focused on basic key-value operations
+- No built-in persistence
+
+**Use Cases:**
+- In-memory caching layers
+- Session management
+- User preferences storage
+- Real-time data storage
+- Queue management
+
+**Advantages:**
+- Extremely high performance
+- Simple and straightforward model
+- Highly scalable
+- Flexible value storage
+
+**Considerations:**
+- Limited to key-based operations
+- Application layer must handle complex operations
+- No built-in support for relationships between data items
+
+**Key-Value Store Comparison:**
+
+| Advantages | Considerations |
+|------------|---------------|
+| • Extremely high performance | • Limited to key-based operations |
+| • Simple and straightforward model | • Application layer must handle complex operations |
+| • Highly scalable | • No built-in support for relationships between data items |
+| • Flexible value storage | |
+
+##### Document Store
+
+Document stores are an evolution of key-value stores, where the values are structured documents (XML, JSON, binary, etc).
+<br/><br/>
+**Core Characteristics:**
+- Documents contain all information for a given object
+- Flexible schema allows varying document structures
+- Query capabilities based on document content
+- Documents organized by collections, tags, or metadata
+
+**Common Implementations:**
+
+*MongoDB Architecture:*
+- Document-oriented database
+- Supports rich queries and indexing
+- Built-in horizontal scaling (sharding)
+- Collection-based organization
+
+*CouchDB Architecture:*
+- Document-based database with REST API
+- Multi-version concurrency control
+- Built for high availability
+- Bi-directional replication
+
+*Elasticsearch:*
+- Full-text search engine
+- Document-oriented
+- Advanced indexing capabilities
+- Analytics and visualization support
+
+**Use Cases:**
+- Content management systems
+- Product catalogs
+- User profiles
+- Game state data
+- Analytics platforms
+
+**Advantages:**
+- Schema flexibility
+- Rich query capabilities
+- Natural data representation
+- Good for complex, nested data structures
+
+**Considerations:**
+- More complex than pure key-value stores
+- Query performance can vary based on structure
+- May require careful index management
+- Eventual consistency trade-offs
+
+**Document Store Comparison:**
+
+| Advantages | Considerations |
+|------------|---------------|
+| • Schema flexibility | • More complex than pure key-value stores |
+| • Rich query capabilities | • Query performance can vary based on structure |
+| • Natural data representation | • May require careful index management |
+| • Good for complex, nested data structures | • Eventual consistency trade-offs |
+
+Both key-value and document stores serve as fundamental building blocks for modern distributed systems, with document stores offering additional querying capabilities while maintaining the performance benefits of their key-value store foundation.

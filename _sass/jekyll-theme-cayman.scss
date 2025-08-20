@@ -232,6 +232,14 @@ a {
     font-weight: bold;
   }
 
+  table th, table td {
+    border: none;
+  }
+
+  table td:first-child, table th:first-child {
+    border-right: 1px solid #e9ebec;
+  }
+
   .post-title {
     text-transform: uppercase;
     margin-bottom: 1rem;
