@@ -4,8 +4,8 @@ html {
 
 .main {
   display: grid;
-  grid-template-columns: 14rem minmax(0, 1fr);
-  column-gap: 3.25rem;
+  grid-template-columns: minmax(0, 1fr) 14rem;
+  column-gap: 0;
   align-items: start;
   width: 100%;
 }
@@ -14,12 +14,11 @@ html {
   position: sticky;
   top: 1.75rem;
   align-self: start;
-  order: -1;
 }
 
 .section-nav {
   padding: 0.15rem 0 0.15rem 1rem;
-  margin: 0;
+  margin: 0 0 0 1rem;
   border-left: 1px solid rgba(60, 110, 96, 0.28);
   font-family: $sans;
   font-size: 0.68rem;
@@ -88,7 +87,7 @@ html {
   }
 
   .section-nav {
-    margin-bottom: 1.75rem;
+    margin: 0 0 1.75rem;
     padding: 0 0 1rem;
     border-left: 0;
     border-bottom: 1px solid rgba(60, 110, 96, 0.28);

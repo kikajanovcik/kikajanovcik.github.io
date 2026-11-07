@@ -485,6 +485,153 @@ html.from-landing.is-settled .project-name {
     }
   }
 
+  .about-lead {
+    max-width: 38rem;
+    margin-bottom: 0;
+  }
+
+  .cv {
+    max-width: 44rem;
+    margin-top: 2.4rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .cv-label {
+    margin: 0 0 1.35rem;
+    color: #7d8a84;
+    font-family: $sans;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    line-height: 1.4;
+    text-transform: uppercase;
+  }
+
+  .cv-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .cv-role {
+    display: grid;
+    grid-template-columns: 13rem 1.15rem minmax(0, 1fr);
+    column-gap: 0.45rem;
+    margin: 0;
+    padding-bottom: 1.85rem;
+  }
+
+  .cv-when {
+    padding-top: 0.2rem;
+    text-align: right;
+  }
+
+  .cv-dates {
+    display: block;
+    color: #6d7c76;
+    white-space: nowrap;
+    font-family: $sans;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    line-height: 1.45;
+    text-transform: uppercase;
+  }
+
+  .cv-rail {
+    position: relative;
+  }
+
+  .cv-rail::before {
+    content: "";
+    position: absolute;
+    top: 0.66rem;
+    bottom: -2.51rem;
+    left: 50%;
+    z-index: 0;
+    width: 1px;
+    background: rgba(224, 122, 148, 0.7);
+  }
+
+  .cv-role:last-child .cv-rail::before {
+    display: none;
+  }
+
+  .cv-rail::after {
+    content: "";
+    position: absolute;
+    top: 0.42rem;
+    left: 50%;
+    z-index: 1;
+    width: 0.48rem;
+    height: 0.48rem;
+    border: 1.5px solid $pink-ink;
+    border-radius: 50%;
+    background: $ivory;
+    transform: translateX(-50%);
+  }
+
+  .cv-role-now .cv-rail::after {
+    background: $pink;
+    border-color: $pink;
+  }
+
+  .cv-org {
+    margin: 0;
+    color: $pink-ink;
+    font-family: $sans;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+    text-align: right;
+  }
+
+  .cv-role h2 {
+    margin: 0.12rem 0 0.55rem;
+    font-size: 1.28rem;
+    line-height: 1.2;
+  }
+
+  .cv-body ul {
+    margin: 0.35rem 0 0.7rem;
+  }
+
+  @include small {
+    .cv-role {
+      grid-template-columns: 1.15rem minmax(0, 1fr);
+      row-gap: 0.35rem;
+    }
+
+    .cv-rail {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+
+    .cv-when,
+    .cv-body {
+      grid-column: 2;
+    }
+
+    .cv-when,
+    .cv-org {
+      text-align: left;
+    }
+
+    .cv-dates {
+      display: inline;
+    }
+
+    .cv-dates + .cv-dates {
+      margin-left: 0.3rem;
+    }
+
+    .cv-role h2 {
+      font-size: 1.18rem;
+    }
+  }
+
   p {
     margin-top: 0;
     margin-bottom: 0.95em;
