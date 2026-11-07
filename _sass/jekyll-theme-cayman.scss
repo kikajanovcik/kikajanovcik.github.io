@@ -79,13 +79,13 @@ a {
 .btn {
   display: inline-block;
   margin: 0;
-  padding: 0.48rem 0.95rem;
+  padding: 0.38rem 0.78rem;
   color: rgba(255, 247, 244, 0.92);
   background-color: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(246, 198, 214, 0.45);
   border-radius: 999px;
   font-family: $sans;
-  font-size: 0.78rem;
+  font-size: 0.68rem;
   font-weight: 400;
   letter-spacing: 0.03em;
   line-height: 1.3;
@@ -109,11 +109,127 @@ a {
 }
 
 .page-header-index {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 3.5rem 1.25rem;
+}
+
+.page-header-index .banner-index {
+  z-index: 1;
+}
+
+.cursor-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    background:
+      radial-gradient(circle, #fff 0 1.5px, rgba(255, 186, 210, 0.9) 2px, transparent 6px) center / 100% 100% no-repeat,
+      linear-gradient(to bottom, transparent 0%, rgba(255, 190, 214, 0.2) 18%, #fff 50%, rgba(255, 190, 214, 0.2) 82%, transparent 100%) center / 2px 100% no-repeat,
+      linear-gradient(to right, transparent 0%, rgba(255, 170, 198, 0.25) 18%, #fff 50%, rgba(255, 170, 198, 0.25) 82%, transparent 100%) center / 100% 2px no-repeat;
+    filter: drop-shadow(0 0 4px rgba(255, 160, 196, 0.95));
+  }
+
+  &::before {
+    width: 1.7rem;
+    height: 1.7rem;
+    margin: -0.85rem 0 0 -0.85rem;
+    animation: sparkle-twinkle 1.6s ease-in-out infinite;
+  }
+
+  &::after {
+    width: 0.85rem;
+    height: 0.85rem;
+    margin: -0.425rem 0 0 -0.425rem;
+    animation: sparkle-twinkle-x 1.6s ease-in-out infinite;
+  }
+
+  &.is-on {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}
+
+@keyframes sparkle-twinkle {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: scale(0.72);
+    opacity: 0.7;
+  }
+}
+
+@keyframes sparkle-twinkle-x {
+  0%,
+  100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: rotate(45deg) scale(0.55);
+    opacity: 0.45;
+  }
+}
+
+.sparkle-bit {
+  position: absolute;
+  z-index: 2;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin: -0.475rem 0 0 -0.475rem;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, #fff 0 1.5px, rgba(255, 186, 210, 0.9) 2px, transparent 6px) center / 100% 100% no-repeat,
+    linear-gradient(to bottom, transparent 0%, #fff 50%, transparent 100%) center / 2px 100% no-repeat,
+    linear-gradient(to right, transparent 0%, rgba(255, 176, 204, 0.95) 50%, transparent 100%) center / 100% 2px no-repeat;
+  filter: drop-shadow(0 0 4px rgba(255, 160, 196, 0.95));
+  animation: sparkle-fade 0.8s ease-out forwards;
+}
+
+.sparkle-bit-dot {
+  width: 0.42rem;
+  height: 0.42rem;
+  margin: -0.21rem 0 0 -0.21rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 30%, rgba(255, 176, 204, 0.9) 45%, transparent 72%);
+  filter: drop-shadow(0 0 3px rgba(255, 160, 196, 0.95));
+}
+
+@keyframes sparkle-fade {
+  0% {
+    opacity: 0.95;
+    transform: scale(1) rotate(0deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.2) rotate(28deg);
+  }
 }
 
 .banner-index,
@@ -152,15 +268,52 @@ a {
   font-size: clamp(2.25rem, 4.8vw, 3.6rem);
 }
 
+$shrink-duration: 1.55s;
+$shrink-ease: cubic-bezier(0.33, 0.1, 0.25, 1);
+
+html.from-landing,
+html.from-landing body {
+  overflow: hidden;
+}
+
+html.from-landing.is-open,
+html.from-landing.is-open body {
+  overflow: auto;
+}
+
+html.from-landing .page-header-default {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1.25rem;
+  transition: min-height $shrink-duration $shrink-ease, padding $shrink-duration $shrink-ease;
+}
+
+html.from-landing.is-settled .page-header-default {
+  min-height: 0;
+  padding: 2.5rem 1.25rem 1.85rem;
+}
+
+html.from-landing .project-name {
+  font-size: clamp(2.25rem, 4.8vw, 3.6rem);
+  transition: font-size $shrink-duration $shrink-ease;
+}
+
+html.from-landing.is-settled .project-name {
+  font-size: clamp(1.7rem, 2.9vw, 2.1rem);
+}
+
 .project-tagline {
   margin: 1rem 0 1.55rem;
   color: #f6c6d4;
   font-family: $sans;
-  font-size: 0.68rem;
+  font-size: 0.64rem;
   font-weight: 400;
-  letter-spacing: 0.38em;
+  letter-spacing: 0.72em;
+  word-spacing: 0.85em;
   line-height: 1.6;
-  text-indent: 0.38em;
+  text-indent: 0.72em;
   text-transform: uppercase;
 }
 
@@ -269,7 +422,7 @@ a {
     margin: 0 0 0.7rem;
     color: $ink;
     font-family: $serif;
-    font-size: clamp(1.75rem, 2.8vw, 2.3rem);
+    font-size: clamp(1.4rem, 2.2vw, 1.75rem);
     font-weight: 600;
     letter-spacing: -0.02em;
     line-height: 1.1;

@@ -6,10 +6,69 @@
 <body>
 
   <header class="page-header-default page-header-index" role="banner">
+    <div class="cursor-light" aria-hidden="true"></div>
     <div class="banner-index">
       {% include header.html %}
       {{ content }} 
     </div>
   </header>
+  <script>
+    (function () {
+      var header = document.querySelector(".page-header-index");
+      var light = document.querySelector(".cursor-light");
+      if (!header || !light) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      var lastX = null;
+      var lastY = null;
+      var bits = [];
+
+      var sprinkle = function (x, y) {
+        var bit = document.createElement("span");
+        bit.className = Math.random() > 0.55 ? "sparkle-bit sparkle-bit-dot" : "sparkle-bit";
+        bit.style.left = x + "px";
+        bit.style.top = y + "px";
+        bit.style.rotate = Math.round(Math.random() * 70) + "deg";
+        header.appendChild(bit);
+        bits.push(bit);
+        if (bits.length > 16) {
+          var oldest = bits.shift();
+          if (oldest.parentNode) oldest.parentNode.removeChild(oldest);
+        }
+        window.setTimeout(function () {
+          if (bit.parentNode) bit.parentNode.removeChild(bit);
+          var index = bits.indexOf(bit);
+          if (index !== -1) bits.splice(index, 1);
+        }, 800);
+      };
+
+      var place = function (event) {
+        var rect = header.getBoundingClientRect();
+        var x = event.clientX - rect.left;
+        var y = event.clientY - rect.top;
+        light.style.transform = "translate3d(" + x + "px, " + y + "px, 0)";
+        light.classList.add("is-on");
+
+        if (lastX === null) {
+          lastX = x;
+          lastY = y;
+          return;
+        }
+
+        var distance = Math.hypot(x - lastX, y - lastY);
+        if (distance < 16) return;
+        sprinkle(lastX, lastY);
+        lastX = x;
+        lastY = y;
+      };
+
+      header.addEventListener("pointermove", place);
+      header.addEventListener("pointerleave", function () {
+        light.classList.remove("is-on");
+        lastX = null;
+        lastY = null;
+      });
+    })();
+  </script>
 </body>
 </html>

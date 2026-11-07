@@ -1,16 +1,16 @@
-window.onload = function() {
-    const header = document.getElementsByClassName("page-header-index")[0];
-    const div = header.querySelector('.banner-index');
+(function () {
+  var root = document.documentElement;
+  if (!root.classList.contains("from-landing")) return;
 
-    const previous = document.referrer !== '' ? new URL(document.referrer).pathname : '';
-    /* TODO: review
-    if (previous === "/" || previous === "/index") {
-        header.classList.add("page-header-transitioning");
-        div.classList.remove("banner-index");
-        div.classList.add("banner");
-    } else {
-        header.classList.remove("page-header-index");
-        div.classList.remove("banner-index");
-    }
-    */
-};
+  var settle = function () {
+    root.classList.add("is-settled");
+    window.setTimeout(function () {
+      root.classList.add("is-open");
+    }, 1650);
+  };
+
+  requestAnimationFrame(function () {
+    requestAnimationFrame(settle);
+  });
+  window.setTimeout(settle, 50);
+})();
