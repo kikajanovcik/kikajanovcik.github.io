@@ -3,9 +3,9 @@
 </a>
 <p class="project-tagline">• software engineer •</p>
 <nav class="site-nav" aria-label="Sections">
-  <a href="/system-design" class="btn">System design</a>
-  <a href="/operating-systems" class="btn">Operating systems</a>
-  <a href="/algorithms" class="btn">Algorithms</a>
-  <a href="/nodejs" class="btn">Node.js in production</a>
-  <a href="/about" class="btn">About</a>
+  <a href="/system-design" class="btn{% if page.permalink == '/system-design' %} is-current{% endif %}">System design</a>
+  <a href="/operating-systems" class="btn{% if page.permalink == '/operating-systems' %} is-current{% endif %}">Operating systems</a>
+  <a href="/algorithms" class="btn{% if page.permalink == '/algorithms' %} is-current{% endif %}">Algorithms</a>
+  <a href="/nodejs" class="btn{% if page.permalink == '/nodejs' %} is-current{% endif %}">Node.js in production</a>
+  <a href="/about" class="btn{% if page.permalink == '/about' %} is-current{% endif %}">About</a>
 </nav>
