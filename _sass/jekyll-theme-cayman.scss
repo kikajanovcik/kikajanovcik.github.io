@@ -306,7 +306,7 @@ html.from-landing.is-settled .project-name {
 
 .project-tagline {
   margin: 1rem 0 1.55rem;
-  color: #f6c6d4;
+  color: $pink-soft;
   font-family: $sans;
   font-size: 0.64rem;
   font-weight: 400;
@@ -425,39 +425,43 @@ html.from-landing.is-settled .project-name {
   }
 
   h3 {
-    margin-top: 1.6rem;
-    margin-bottom: 0.4rem;
-    color: $pink-ink;
-    font-size: 1.15rem;
+    margin-top: 1.05rem;
+    margin-bottom: 0.2rem;
+    color: $pink-heading;
+    font-size: 1.08rem;
     font-weight: 600;
   }
 
   h4,
   h5,
   h6 {
-    margin-top: 1.25rem;
-    margin-bottom: 0.35rem;
-    color: $pink-ink;
-    font-size: 1rem;
+    margin-top: 0.8rem;
+    margin-bottom: 0.15rem;
+    color: $pink-heading;
+    font-size: 0.98rem;
     font-weight: 600;
   }
 
+  h4 {
+    color: $ink;
+  }
+
   h2 {
-    margin-top: 2.4rem;
-    margin-bottom: 0.65rem;
+    margin-top: 1.45rem;
+    margin-bottom: 0.35rem;
     color: $section-headings-color;
     font-family: $serif;
-    font-size: 1.5rem;
+    font-size: 1.35rem;
     font-weight: 600;
     letter-spacing: -0.02em;
   }
 
   .post-header {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1.15rem;
   }
 
   .post-title {
-    margin: 0 0 0.7rem;
+    margin: 0 0 0.45rem;
     color: $ink;
     font-family: $serif;
     font-size: clamp(1.4rem, 2.2vw, 1.75rem);
@@ -477,11 +481,26 @@ html.from-landing.is-settled .project-name {
   }
 
   .post-content {
+    line-height: 1.48;
+
+    > h2:first-child,
+    .content > h2:first-child {
+      margin-top: 0;
+    }
+
     h2 {
       color: $ink;
       font-family: $serif;
       font-weight: 600;
-      font-size: 1.5rem;
+      font-size: 1.35rem;
+    }
+
+    br {
+      display: block;
+      height: 0;
+      font-size: 0;
+      line-height: 0;
+      content: "";
     }
   }
 
@@ -634,7 +653,7 @@ html.from-landing.is-settled .project-name {
 
   p {
     margin-top: 0;
-    margin-bottom: 0.95em;
+    margin-bottom: 0.55em;
   }
 
   code {
@@ -680,10 +699,10 @@ html.from-landing.is-settled .project-name {
 
   .highlight pre,
   pre {
-    padding: 1rem 1.1rem;
+    padding: 0.75rem 0.9rem;
     overflow: auto;
-    font-size: 0.9rem;
-    line-height: 1.55;
+    font-size: 0.86rem;
+    line-height: 1.4;
     border-radius: 0.7rem;
     -webkit-overflow-scrolling: touch;
   }
@@ -708,12 +727,13 @@ html.from-landing.is-settled .project-name {
 
   ul,
   ol {
-    margin-top: 0.2rem;
-    padding-left: 1.25rem;
+    margin-top: 0.1rem;
+    margin-bottom: 0.45rem;
+    padding-left: 1.15rem;
   }
 
   li {
-    margin-bottom: 0.28rem;
+    margin-bottom: 0.08rem;
   }
 
   li::marker {
@@ -754,7 +774,7 @@ html.from-landing.is-settled .project-name {
 
     th,
     td {
-      padding: 0.65rem 1rem;
+      padding: 0.38rem 0.7rem;
       border: 1px solid $table-border-color;
     }
   }

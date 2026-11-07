@@ -39,7 +39,7 @@ simple: true
           <li>Set up CI/CD in GitHub Actions.</li>
           <li>Ran proofs of concept before adopting new technology.</li>
           <li>Shipped Mixmax AI and inbox synchronization.</li>
-          <li>Wrote for the <a href="https://www.mixmax.com/engineering/author/kristina-janovcikova">engineering blog</a>.</li>
+          <li>Wrote for the engineering blog about <a href="https://www.mixmax.com/engineering/monorepos-why-we-made-the-switch">monorepos</a> and <a href="https://www.mixmax.com/engineering/are-we-still-running-our-dev-environment-remotely-spoiler-alert-yes-and-more">our own dev sync environment</a></li>
         </ul>
       </div>
     </li>
