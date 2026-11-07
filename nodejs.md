@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Node.js in Production
+description: Notes on running Node.js in production, from the event loop and scaling to security, caching, and deployment.
 permalink: /nodejs
 ---
 

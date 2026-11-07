@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Algorithms
+description: Notes on Big O notation, data structures, and algorithms.
 permalink: /algorithms
 ---
 

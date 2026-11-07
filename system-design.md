@@ -1,6 +1,7 @@
 ---
 layout: page
 title: System design
+description: Notes on scalability, load balancing, reverse proxies, caching, and databases.
 nav: system
 permalink: /system-design
 ---

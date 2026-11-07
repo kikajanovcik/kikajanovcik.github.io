@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kikajanovcik.github.io/sitemap.xml

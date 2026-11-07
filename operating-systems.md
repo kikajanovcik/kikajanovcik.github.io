@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Operating Systems
+description: Notes on processes, threads, and bit manipulation.
 permalink: /operating-systems
 ---
 

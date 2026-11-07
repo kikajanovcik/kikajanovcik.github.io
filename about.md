@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About
+description: Why Kristina Janovcikova keeps these software notes, and where the material comes from.
 permalink: /about
 simple: true
 ---

@@ -1,5 +1,14 @@
-title: kristina janovcikova
-author: kristina janovcikova
+title: Kristina Janovcikova
+tagline: software developer
+description: Notes by Kristina Janovcikova, a software developer, on system design, algorithms, operating systems, and Node.js in production.
+url: https://kikajanovcik.github.io
+lang: en-US
+author:
+  name: Kristina Janovcikova
+social:
+  name: Kristina Janovcikova
+  links:
+    - https://github.com/kikajanovcik
 theme: jekyll-theme-cayman
 
 plugins:
