@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Node.js in Production
-description: Notes on running Node.js in production, from the event loop and scaling to security, caching, and deployment.
+description: Notes on running Node.js in production, from the event loop, errors, and streams to delivery and deployment.
 permalink: /nodejs
 ---
 
@@ -30,7 +30,7 @@ if (isMainThread) {
 ```
 
 ## Scaling services<a name="scaling-services"></a>
-Design stateless services so any instance can serve any request.
+Design stateless services so any instance can serve any request. The general shape of vertical and horizontal scale is in [Scalability](/system-design#scalability).
 
 - Horizontal scale: run multiple processes/containers (K8s/PM2/Docker). Prefer one process per container; scale out rather than `cluster` in containers.
 - WebSockets: use sticky sessions on the LB or a shared pub/sub (Redis) to broadcast events across instances.
@@ -77,6 +77,13 @@ const breaker = new opossum(doFetch, {
 await breaker.fire('https://api.example.com');
 ```
 
+## Errors<a name="errors"></a>
+A failed request should fail that request. It should not take the process down.
+
+- A bad request or a thrown handler returns a 4xx or a 5xx from one place at the edge. Log the stack once, with the request id.
+- `unhandledRejection` and `uncaughtException` mean a bug escaped the handler. Log it and exit. A process that keeps going after that is in a state you did not plan. Let the orchestrator start a new one. See [Delivery](#delivery).
+- A timeout from a dependency is worth a retry. A bug is not. Retrying a bug only fills the log.
+
 ## Observability<a name="observability"></a>
 Make behavior measurable and debuggable.
 
@@ -121,7 +128,7 @@ Optimize client/server I/O and payloads.
 - Client: use `undici` agent with keep-alive; reuse connections; DNS cache (`cacheable-lookup`) if needed.
 - Server: enable gzip/brotli; ETag/Last-Modified; cache headers; conditional requests.
 - Framework: Fastify + JSON schema validation for speed and safer handlers.
-- Streaming: prefer streams for large payloads; enable HTTP/2 where viable; be mindful of head-of-line blocking.
+- Streaming: a large body is a [stream](#streams). HTTP/2 avoids the head-of-line blocking of HTTP/1.1.
 
 ```js
 // Undici global agent
@@ -130,8 +137,31 @@ import { Agent, setGlobalDispatcher } from 'undici';
 setGlobalDispatcher(new Agent({ keepAliveTimeout: 10_000, connections: 100 }));
 ```
 
+## Streams<a name="streams"></a>
+A stream moves bytes in chunks. When the consumer's buffer fills, the producer pauses. That pause is backpressure. Without it a fast sender or a large file fills memory, and the process dies.
+
+- Use one for a file, an upload, or a response you are proxying. `pipeline` from `node:stream/promises` connects the pieces and cleans up when one of them errors.
+- Do not buffer a body you could forward. `response.text()` and `Buffer.concat` hold the whole thing.
+- The same rule applies on HTTP/2. The protocol changes the blocking, not the memory.
+
+```js
+import { createReadStream } from 'node:fs';
+import { pipeline } from 'node:stream/promises';
+
+app.get('/file', async (_req, res) => {
+  await pipeline(createReadStream('./report.csv'), res);
+});
+```
+
+## Memory<a name="memory"></a>
+The heap is where objects live, and the garbage collector frees whatever nothing references. A leak is a reference you kept: a Map that only grows, a listener you never removed, a closure holding a request.
+
+- A leak climbs and stays high after the traffic has gone. A busy process spikes and settles.
+- Take a heap snapshot while it is large, and another a few minutes later. The objects that grew are the leak. `clinic heapprofiler`, or Chrome devtools attached to the process, shows them.
+- `--max-old-space-size` gives a leak more room. It does not remove it. Set a limit so the process exits and restarts instead of swapping.
+
 ## Caching<a name="caching"></a>
-Use multiple layers and plan invalidation.
+Use multiple layers and plan invalidation. Which store to put the copy in is in [Cache](/system-design#cache).
 
 - Strategies: read-through, write-through, write-behind; set TTLs; use versioned keys.
 - Stampede control: single-flight locks, request coalescing, jittered TTLs, stale-while-revalidate.
@@ -146,7 +176,7 @@ Scale live updates predictably.
 - Presence/state: store transient state in Redis; set expirations; avoid pinning to a single node.
 
 ## Background jobs and scheduling<a name="background-jobs"></a>
-Move non-critical work off the request path.
+Move non-critical work off the request path. A job that can be retried belongs with the [resilience](#resilience-patterns) notes.
 
 - Queues: `bullmq`/`bee-queue`/`agenda`. Run workers in separate processes/containers.
 - Idempotency: dedupe keys, job IDs; ensure handlers can safely retry.
@@ -166,7 +196,7 @@ await emails.add('send', { to: 'user@example.com' }, {
 ```
 
 ## Data access<a name="data-access"></a>
-Make databases reliable and fast.
+Make databases reliable and fast. Replication, sharding, and when to leave SQL are in [Databases](/system-design#databases).
 
 - Pooling: set sensible pool sizes; avoid exhausting DB with too many connections; consider PgBouncer.
 - Queries: always parameterize; add proper indexes; avoid N+1 (batching, caching).
@@ -174,8 +204,16 @@ Make databases reliable and fast.
 - MongoDB: design for access patterns; use projections; compound indexes; `lean()` with Mongoose for speed.
 - Timeouts: set client and query timeouts; circuit breakers around DB calls.
 
+## Delivery<a name="delivery"></a>
+What runs in production is an artifact that was built once.
+
+- **Container:** an image is a filesystem and a command to start. The running container is one process, with its own files and its own network namespace. Run one process in it. The same image goes to every environment, and the config comes from the environment, not from building again.
+- **Pipeline:** a push runs the tests, builds the image, and deploys that digest. Do not build a second time on the server.
+- **Infrastructure as code:** Terraform or Pulumi describe the load balancer, the database, and the machines. The change is a diff in review. A click in the console drifts from that file, and the next apply puts the click back.
+- **Rollout:** bring up a new instance, wait until it is ready, then drain the old one. If the new one never becomes ready, stop. Rolling back is deploying the previous image.
+
 ## Deployment<a name="deployment"></a>
-Ship minimal, predictable artifacts.
+Ship minimal, predictable artifacts. How that artifact is built and rolled out is in [Delivery](#delivery).
 
 - Images: use slim or distroless; avoid heavy Alpine if native deps/openssl issues; cache layers.
 - Runtime: `NODE_ENV=production`; source maps for error tracking; health endpoints.
