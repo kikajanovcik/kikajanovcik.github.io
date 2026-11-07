@@ -1,0 +1,19 @@
+<button class="to-top" type="button" aria-label="Back to top"></button>
+<script>
+  (function () {
+    var button = document.querySelector(".to-top");
+    if (!button) return;
+
+    var toggle = function () {
+      button.classList.toggle("is-visible", window.scrollY > 320);
+    };
+
+    window.addEventListener("scroll", toggle, { passive: true });
+    toggle();
+
+    button.addEventListener("click", function () {
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    });
+  })();
+</script>
