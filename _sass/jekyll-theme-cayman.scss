@@ -2,7 +2,6 @@
 @import "rouge-github";
 @import "variables";
 @import "nav";
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
 
 @mixin large {
   @media screen and (min-width: #{$large-breakpoint}) {
@@ -26,13 +25,22 @@
   box-sizing: border-box;
 }
 
+::selection {
+  background: #f8d5de;
+  color: $ink;
+}
+
 body {
   padding: 0;
   margin: 0;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
+  font-family: $sans;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.7;
   color: $body-text-color;
+  background: $ivory;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 #skip-to-content {
@@ -48,242 +56,273 @@ body {
     left: 10px;
     height: auto;
     width: auto;
-    background: invert($body-link-color);
-    outline: thick solid invert($body-link-color);
+    background: $ivory;
+    outline: 2px solid $rose;
+    z-index: 10;
   }
 }
 
 a {
   color: $body-link-color;
-  text-decoration: none;
-  transition: color 0.3s;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: rgba(184, 77, 110, 0.45);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
 
   &:hover {
-    color: rgb(19, 71, 122);
-    text-decoration: none;
+    color: #9a3d5c;
+    text-decoration-color: currentColor;
   }
 }
 
 .btn {
   display: inline-block;
-  margin-bottom: 1rem;
-  color: rgba(255, 255, 255, 0.7);
-  background-color: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 0.3rem;
-  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
-  font-size: 0.8rem;
-  text-transform: uppercase;
+  margin: 0;
+  padding: 0.48rem 0.95rem;
+  color: rgba(255, 247, 244, 0.92);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(246, 198, 214, 0.45);
+  border-radius: 999px;
+  font-family: $sans;
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  line-height: 1.3;
+  text-decoration: none;
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
 
   &:hover {
-    color: rgba(255, 255, 255, 0.8);
+    color: #fff;
     text-decoration: none;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.3);
-  }
-
-  + .btn {
-    margin-left: 1rem;
-  }
-
-  @include large {
-    padding: 0.4rem 0.7rem;
-  }
-
-  @include medium {
-    padding: 0.4rem 0.7rem;
-  }
-
-  @include small {
-    display: block;
-    width: 100%;
-    padding: 0.75rem;
-
-    + .btn {
-      margin-top: 1rem;
-      margin-left: 0;
-    }
+    background-color: rgba(240, 150, 178, 0.34);
+    border-color: rgba(246, 198, 214, 0.95);
   }
 }
 
 .page-header-default {
   color: $header-heading-color;
   text-align: center;
-  background-color: $header-bg-color;
-  background-image: linear-gradient(
-    120deg,
-    $header-bg-color-secondary,
-    $header-bg-color
-  );
-  padding: 2rem 1rem 0.5rem 1rem;
-}
-
-.page-header {
-  height: 250px;
-}
-
-.page-header-transitioning {
-  height: 250px;
-  -webkit-transition: all .5s linear;
-  -moz-transition: all .5s linear;
-  -o-transition: all .5s linear;
-  transition: all .5s linear;
-  -webkit-backface-visibility: hidden !important;
+  background-color: $espresso;
+  background-image: linear-gradient(180deg, #1a3330 0%, #142824 100%);
+  padding: 2.5rem 1.25rem 1.85rem;
 }
 
 .page-header-index {
-  background-size: cover;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1.25rem;
 }
 
-.banner-index {
-  position: relative;
-  top: 33%;
-}
-
+.banner-index,
 .banner {
   position: relative;
-  top: 0%;
-  -webkit-transition: all .5s linear;
-  -moz-transition: all .5s linear;
-  -o-transition: all .5s linear;
-  transition: all .5s linear;
+  top: auto;
+  width: min(44rem, 100%);
+  margin: 0 auto;
+}
+
+.brand {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  color: $header-heading-color;
+  text-decoration: none;
+
+  &:hover {
+    color: $header-heading-color;
+    text-decoration: none;
+  }
 }
 
 .project-name {
+  margin: 0;
   color: $header-heading-color !important;
-  margin-top: 0;
-  margin-bottom: 0.1rem;
+  font-family: $serif;
+  font-weight: 600;
+  font-size: clamp(1.7rem, 2.9vw, 2.1rem);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
 
-  @include large {
-    font-size: 3.25rem;
-  }
-
-  @include medium {
-    font-size: 2.25rem;
-  }
-
-  @include small {
-    font-size: 1.75rem;
-  }
+.page-header-index .project-name {
+  font-size: clamp(2.25rem, 4.8vw, 3.6rem);
 }
 
 .project-tagline {
-  margin-bottom: 3rem;
-  font-weight: normal;
-  opacity: 0.7;
-  font-size: 0.9rem;
+  margin: 1rem 0 1.55rem;
+  color: #f6c6d4;
+  font-family: $sans;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.38em;
+  line-height: 1.6;
+  text-indent: 0.38em;
+  text-transform: uppercase;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
 }
 
 .main-content {
   word-wrap: break-word;
-  font-size: 0.8rem;
+  font-size: 1.02rem;
 
   :first-child {
     margin-top: 0;
   }
 
   @include large {
-    max-width: 64rem;
-    padding: 2rem 3rem;
+    max-width: 72rem;
+    padding: 2.75rem 3rem 3.5rem;
     margin: 0 auto;
   }
 
   @include medium {
-    padding: 2rem 2rem;
+    padding: 2.25rem 2rem 3rem;
   }
 
   @include small {
-    padding: 2rem 1rem;
+    padding: 1.85rem 1.15rem 2.75rem;
   }
 
   kbd {
-    background-color: #fafbfc;
-    border: 1px solid #c6cbd1;
-    border-bottom-color: #959da5;
-    border-radius: 3px;
-    box-shadow: inset 0 -1px 0 #959da5;
-    color: #444d56;
+    background-color: $blush;
+    border: 1px solid $border-color;
+    border-bottom-color: #c5cdc8;
+    border-radius: 4px;
+    box-shadow: inset 0 -1px 0 #c5cdc8;
+    color: $ink;
     display: inline-block;
-    font-size: 11px;
-    line-height: 10px;
-    padding: 3px 5px;
+    font-size: 0.75rem;
+    line-height: 1;
+    padding: 3px 6px;
     vertical-align: middle;
   }
 
   img {
     max-width: 100%;
+    border: 1px solid $border-color;
+    border-radius: 0.7rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $ink;
+    font-weight: 500;
+    line-height: 1.25;
+    text-transform: none;
   }
 
   h3,
   h4,
   h5,
   h6 {
-    color: $headings-color;
-    text-transform: uppercase;
+    font-family: $sans;
+    letter-spacing: -0.02em;
+  }
+
+  h3 {
+    margin-top: 1.6rem;
+    margin-bottom: 0.4rem;
+    color: $pink-ink;
+    font-size: 1.15rem;
+    font-weight: 600;
+  }
+
+  h4,
+  h5,
+  h6 {
+    margin-top: 1.25rem;
+    margin-bottom: 0.35rem;
+    color: $pink-ink;
+    font-size: 1rem;
+    font-weight: 600;
   }
 
   h2 {
-    margin-top: 0rem;
-    margin-bottom: 0.4rem;
+    margin-top: 2.4rem;
+    margin-bottom: 0.65rem;
     color: $section-headings-color;
-    font-weight: bold;
+    font-family: $serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
-  table th, table td {
-    border: none;
-  }
-
-  table td:first-child, table th:first-child {
-    border-right: 1px solid #e9ebec;
+  .post-header {
+    margin-bottom: 1.75rem;
   }
 
   .post-title {
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin: 0 0 0.7rem;
+    color: $ink;
+    font-family: $serif;
+    font-size: clamp(1.75rem, 2.8vw, 2.3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    text-transform: none;
+  }
+
+  .post-header::after {
+    content: "";
+    display: block;
+    width: 2.4rem;
+    height: 3px;
+    border-radius: 999px;
+    background: $pink;
   }
 
   .post-content {
     h2 {
-      color: $post-headings-color;
-      font-family: Monospace;
-      font-weight: normal;
-      font-size: 1.2rem;
+      color: $ink;
+      font-family: $serif;
+      font-weight: 600;
+      font-size: 1.5rem;
     }
   }
 
   p {
-    margin-bottom: 0.8em;
-    margin-block-start: 0em;
-    margin-block-end: 0em;
+    margin-top: 0;
+    margin-bottom: 0.95em;
   }
 
   code {
-    padding: 2px 4px;
+    padding: 0.12em 0.38em;
     font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-    font-size: 0.9rem;
+    font-size: 0.86em;
     color: $code-text-color;
     background-color: $code-bg-color;
     border-radius: 0.3rem;
   }
 
   pre {
-    padding: 0.8rem;
+    padding: 1rem 1.1rem;
     margin-top: 0;
-    margin-bottom: 1rem;
-    font: 1rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    margin-bottom: 1.15rem;
+    font: 0.92rem Consolas, "Liberation Mono", Menlo, Courier, monospace;
     color: $code-text-color;
     word-wrap: normal;
     background-color: $code-bg-color;
     border: solid 1px $border-color;
-    border-radius: 0.3rem;
+    border-radius: 0.7rem;
 
     > code {
       padding: 0;
       margin: 0;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: $code-text-color;
       word-break: normal;
       white-space: pre;
@@ -293,7 +332,7 @@ a {
   }
 
   .highlight {
-    margin-bottom: 1rem;
+    margin-bottom: 1.15rem;
 
     pre {
       margin-bottom: 0;
@@ -303,11 +342,11 @@ a {
 
   .highlight pre,
   pre {
-    padding: 0.8rem;
+    padding: 1rem 1.1rem;
     overflow: auto;
     font-size: 0.9rem;
-    line-height: 1.45;
-    border-radius: 0.3rem;
+    line-height: 1.55;
+    border-radius: 0.7rem;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -331,14 +370,25 @@ a {
 
   ul,
   ol {
-    margin-top: 0;
+    margin-top: 0.2rem;
+    padding-left: 1.25rem;
+  }
+
+  li {
+    margin-bottom: 0.28rem;
+  }
+
+  li::marker {
+    color: $pink;
   }
 
   blockquote {
-    padding: 0 1rem;
-    margin-left: 0;
+    padding: 0.85rem 1.15rem;
+    margin: 1.2rem 0;
     color: $blockquote-text-color;
-    border-left: 0.3rem solid $border-color;
+    background: $blush;
+    border-left: 3px solid $pink;
+    border-radius: 0 0.65rem 0.65rem 0;
 
     > :first-child {
       margin-top: 0;
@@ -354,18 +404,31 @@ a {
     width: 100%;
     overflow: auto;
     word-break: normal;
-    word-break: keep-all; // For Firefox to horizontally scroll wider tables.
+    word-break: keep-all;
+    border-collapse: collapse;
     -webkit-overflow-scrolling: touch;
 
     th {
-      font-weight: bold;
+      font-weight: 500;
+      color: $pink-ink;
+      background: $blush;
     }
 
     th,
     td {
-      padding: 0.5rem 1rem;
+      padding: 0.65rem 1rem;
       border: 1px solid $table-border-color;
     }
+  }
+
+  table th,
+  table td {
+    border: 1px solid $table-border-color;
+  }
+
+  table td:first-child,
+  table th:first-child {
+    border-right: 1px solid $table-border-color;
   }
 
   dl {
@@ -375,7 +438,8 @@ a {
       padding: 0;
       margin-top: 1rem;
       font-size: 1rem;
-      font-weight: bold;
+      font-weight: 500;
+      color: $ink;
     }
 
     dd {
@@ -385,38 +449,51 @@ a {
   }
 
   hr {
-    height: 2px;
+    height: 1px;
     padding: 0;
-    margin: 1rem 0;
-    background-color: $hr-border-color;
+    margin: 2rem 0;
+    background: linear-gradient(90deg, transparent, rgba(224, 122, 148, 0.55), transparent);
     border: 0;
   }
 }
 
 .site-footer,
 .separator {
-  padding-top: 2rem;
-  margin-top: 2rem;
-  border-top: solid 1px $hr-border-color;
+  padding-top: 1.5rem;
+  margin-top: 2.75rem;
+  border-top: 0;
+  background-image: linear-gradient(90deg, transparent, rgba(224, 122, 148, 0.5), transparent);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  background-position: top;
+  text-align: center;
 
   @include large {
-    font-size: 1rem;
+    font-size: 0.92rem;
   }
 
   @include medium {
-    font-size: 1rem;
+    font-size: 0.92rem;
   }
 
   @include small {
-    font-size: 0.9rem;
+    font-size: 0.86rem;
   }
 }
 
 .site-footer-owner {
   display: block;
-  font-weight: bold;
+  color: $ink;
+  font-family: $serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 .site-footer-credits {
-  color: $blockquote-text-color;
+  display: block;
+  margin-top: 0.15rem;
+  color: #6e7a74;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
 }

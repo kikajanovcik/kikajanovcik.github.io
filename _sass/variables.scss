@@ -2,24 +2,38 @@
 $large-breakpoint: 64em !default;
 $medium-breakpoint: 42em !default;
 
+// Palette — airy paper, deep eucalyptus, pink accent
+$ivory: #f5f6f3 !default;
+$blush: #f7eef1 !default;
+$ink: #1c2623 !default;
+$ink-soft: #54605c !default;
+$rose: #e07a94 !default;
+$rose-deep: #9a3d5c !default;
+$pink: #f0a3b8 !default;
+$pink-ink: #b84d6e !default;
+$espresso: #142420 !default;
+
+$serif: "Source Serif 4", Georgia, "Times New Roman", serif !default;
+$sans: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+
 // Headers
-$header-heading-color: #fff !default;
-$header-bg-color: #159957 !default;
-$header-bg-color-secondary: #155799 !default;
+$header-heading-color: #f7f6f3 !default;
+$header-bg-color: #1c3330 !default;
+$header-bg-color-secondary: #142420 !default;
 
 // Text
-$section-headings-color: #22474ca8 !default;
-$post-headings-color: #165f91 !default;
-$headings-color: #18767cbf !default;
-$body-text-color: #606c71 !default;
-$body-link-color: #1e6bb8 !default;
-$blockquote-text-color: #819198 !default;
+$section-headings-color: $ink !default;
+$post-headings-color: $ink !default;
+$headings-color: $pink-ink !default;
+$body-text-color: #24302c !default;
+$body-link-color: $pink-ink !default;
+$blockquote-text-color: #4e5a55 !default;
 
 // Code
-$code-bg-color: #f3f6fa !default;
-$code-text-color: #567482 !default;
+$code-bg-color: #f2f4f1 !default;
+$code-text-color: #3d4a46 !default;
 
 // Borders
-$border-color: #dce6f0 !default;
-$table-border-color: #e9ebec !default;
-$hr-border-color: #eff0f1 !default;
+$border-color: #e2e6e2 !default;
+$table-border-color: #e2e6e2 !default;
+$hr-border-color: #e2e6e2 !default;
